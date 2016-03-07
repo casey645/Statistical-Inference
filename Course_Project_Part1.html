@@ -94,7 +94,7 @@ mean(row_means)</code></pre>
 <pre><code>##[1] 4.98662</code></pre>
 <pre><code>#mean from analytical expression
 1/lambda</code></pre>
-<pre><code>##[1] 4.98662</code></pre>
+<pre><code>##[1] 5</code></pre>
 <p>The distribution of sample means - shown below:</p>
 <pre><code>#plot the histogram of averages
 {r, echo=FALSE}
@@ -117,27 +117,30 @@ legend('topright', c(&quot;simulation&quot;, &quot;theoretical&quot;), lty=c(1,2
 <p>Conclusion - the distribution of averages of 40 exponentials is centered at r mean(row_means) and the same is close to the theoretical center of the distribution, which is <span class="math">\(\lambda^{-1}\)</span> = r 1/lambda.</p>
 </div>
 <div id="show-how-variable-it-is-and-compare-it-to-the-theoretical-variance-of-the-distribution." class="section level3">
-<h3>Show how variable it is and compare it to the theoretical variance of the distribution.</h3>
+<h3>2.Show how variable it is and compare it to the theoretical variance of the distribution.</h3>
 <pre><code>#standard deviation of distribution of averages of 40 exponentials
-sd(row_means)
-#standard deviation from analytical expression
-(1/lambda)/sqrt(sample_size)
-
-#Variance of the sample mean
-var(row_means)
-#Theoritcal variance of the distribution
+sd(row_means)</code></pre>
+<pre><code>##[1] 0.791</code></pre>
+<pre><code>#standard deviation from analytical expression
+(1/lambda)/sqrt(sample_size)</code></pre>
+<pre><code>##[1] 0.7906</code></pre>
+<pre><code>#Variance of the sample mean
+var(row_means)</code></pre>
+<pre><code>## [1] 0.6258</code></pre>
+<pre><code>#Theoritcal variance of the distribution
 1/((0.2*0.2) * 40</code></pre>
+<pre><code>##[1] 0.625</code></pre>
 <p>Therefore, the variability in distribution of averages of 40 exponentials is close to the theoretical variance of the distribution. The variance of sample means is r var(row_means) where as the theoretical variance of the distribution is <span class="math">\(\sigma^2 / n = 1/(\lambda^2 n) = 1/(0.04 \times 40)\)</span> = r 1/(0.04 * 40).</p>
 </div>
 <div id="show-that-the-distribution-is-approximately-normal." class="section level3">
-<h3>Show that the distribution is approximately normal.</h3>
+<h3>3.Show that the distribution is approximately normal.</h3>
 <pre><code>#use qqplot and qqline to compare the distribution of averages of 40 exponentials to a normal distribution
 qqnorm(row_means, col=&quot;blue&quot;)
 qqline(row_means, col = 2)</code></pre>
 <p>Due to the central limit theorem, the averages of samples follow normal distribution. The figure above also shows the density computed using the histogram and the normal density plotted with theoretical mean and variance values. Also, the q-q plot suggests the distribution of averages of 40 exponentials is very close to a normal distribution.</p>
 </div>
 <div id="evaluate-the-coverage-of-the-confidence-interval-for-1lambda-barx-pm-1.96-fracssqrtn." class="section level3">
-<h3>Evaluate the coverage of the confidence interval for <span class="math">\(1/\lambda = \bar{X} \pm 1.96 \frac{S}{\sqrt{n}}\)</span>.</h3>
+<h3>4.Evaluate the coverage of the confidence interval for <span class="math">\(1/\lambda = \bar{X} \pm 1.96 \frac{S}{\sqrt{n}}\)</span>.</h3>
 <pre><code>#Evaluate coverage of the confidence interval
 lambda_vals &lt;- seq(4, 6, by=0.01)
 coverage &lt;- sapply(lambda_vals, function(lamb) {
@@ -154,8 +157,6 @@ qplot(lambda_vals, coverage) + geom_hline(yintercept=0.95, col=2)</code></pre>
 <p>The 95% confidence intervals for the rate parameter (<span class="math">\(\lambda\)</span>) to be estimated (<span class="math">\(\hat{\lambda}\)</span>) are <span class="math">\(\hat{\lambda}{low} = \hat{\lambda}(1 - \frac{1.96}{\sqrt{n}})\)</span> and <span class="math">\(\hat{\lambda}{upp} = \hat{\lambda}(1 + \frac{1.96}{\sqrt{n}})\)</span>. As can be seen from the plot above, for selection of <span class="math">\(\hat{\lambda}\)</span> around 5, the average of the sample mean falls within the confidence interval at least 95% of the time. Note that the true rate, <span class="math">\(\lambda\)</span> is 5.</p>
 <p>Since, we consider the distribution of averages of exponentials, the standard deviation of this distribution already incorporates the () term i.e. it is the standard error.</p>
 <p>The confidence interval is given by r mean(row_means) + c(-1, 1) * 1.96 * sd(row_means)</p>
-<pre><code>plot(cars)</code></pre>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
 </div>
 </div>
 </div>
